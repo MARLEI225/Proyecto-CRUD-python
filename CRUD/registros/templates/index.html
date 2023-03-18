@@ -1,0 +1,96 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Todos los productos</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous" />
+</head>
+
+<body class="bg-dark">
+    <div class="col-md-4 offset-md-4">
+                            <!-- Create Form -->
+                            <form action="{% url 'create_product' %}" method="POST" class="card card-body mb-2">
+                                {% csrf_token %}
+        
+                                <label for="descripcion">Categoria del producto:</label>
+                                <input type="text" name="descripcion" id="descripcion" placeholder="Escribe la Categoria del producto" class="form-control mb-2"
+                                    autofocus />
+                                
+                                <label for="categoria">Categoria del producto:</label>
+                                <input type="text" name="categoria" id="categoria" placeholder="Escribe la Categoria del producto" class="form-control mb-2"
+                                    autofocus />
+
+                                <label for="precio">Precio del producto:</label>
+                                <input name="precio" id="precio" pattern="^\d*(\.\d{0,2})?$"  placeholder="2 decimales ex:1.50, 12.25" class="form-control mb-2"
+                                autofocus/>
+
+                                <label for="cantidad">Cantidad de productos:</label>
+                                <input   name="cantidad" id="cantidad" placeholder="Escriba la cantidad" class="form-control mb-2"
+                                autofocus/>
+                                
+                                <label for="categoriadesc">Descripcion del producto:</label>
+                                <textarea name="categoriadesc" id="categoriadesc" rows="2" class="form-control mb-2"
+                                    placeholder="Escribe la descripcion de la categoria"></textarea>
+        
+                                    <button class="btn btn-primary">save</button>
+                            </form>
+        <div class="list-group">
+            <div class="card card-body bg-secondary text-light d-flex flex-row justify-content-between mb-2">
+                <div>
+                    {{error}}
+
+
+
+                    <!-- table products -->
+                    <h1>Todos los productos</h1>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Descripción</th>
+                                <th>Categoría</th>
+                                <th>Precio</th>
+                                <th>Cantidad</th>
+                                <th>Categoría descripción</th>
+                                <th>Accion</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for data in productos %}
+                            <tr>
+                                <td>{{ data.id }}</td>
+                                <td>{{ data.descripcion }}</td>
+                                <td>{{ data.categoria }}</td>
+                                <td>{{ data.precio }}</td>
+                                <td>{{ data.cantidad }}</td>
+                                <td>{{ data.categoriadesc }}</td>
+                                <td>
+                                    <form action="{% url 'delete_product' data.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-danger">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <form action="{% url 'update' data.id %}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="btn btn-primary">Update</button>
+                                    </form>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

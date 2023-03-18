@@ -1,0 +1,22 @@
+label {
+
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.3125rem;
+    font-weight: 600;
+    letter-spacing: 0.025rem;
+    font-style: normal;
+    text-transform: capitalize;
+    color: #274659;
+    background-color: #ffffff;
+    border-radius: 0.15rem;
+    -webkit-border-radius: 0.15rem;
+    -moz-border-radius: 0.15rem;
+    padding: 0.3rem 0.4rem;
+    border-style: none;
+    border-width: 0rem;
+    border-color: #EF2D56;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    -box-shadow: none;
+    
+    }
